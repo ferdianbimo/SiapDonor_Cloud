@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>{{ $pageTitle }}</title>
 </head>
+
 <body>
     @extends('app')
     @extends('navbar')
@@ -10,7 +13,7 @@
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="img/heading.png" alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -31,7 +34,7 @@
     <!-- Carousel End -->
 
     <!-- Facts Start -->
-    <div class="container-fluid facts my-5 py-5">
+    {{-- <div class="container-fluid facts my-5 py-5">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
@@ -60,8 +63,92 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Facts End -->
 
+    <div class="container mt-4">
+        <div class="row mb-0">
+            <div class="col-lg-9 col-xl-10">
+                <h2 class="mb-3">Available Donators</h4>
+            </div>
+            <div class="col-lg-3 col-xl-2">
+                <div class="d-grid gap-2">
+                    <a href="" class="btn btn-primary">Create Donors</a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive border p-3 rounded-3">
+            <table class="table table-bordered table-hover table-striped mb-0 bg-white datatable" id="donorTable">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Blood Type</th>
+
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+    <div class="col-lg-9 col-xl-10">
+        <h2 class="mb-3">
+            </h4>
+    </div>
     @extends('footer')
 </body>
+
+@push('scripts')
+    <script type="module">
+        $(document).ready(function() {
+            $("#donorTable").DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: "/getDonors",
+                columns: [{
+                        data: "DT_RowIndex",
+                        name: "DT_RowIndex",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "firstname",
+                        name: "firstname"
+                    },
+                    {
+                        data: "lastname",
+                        name: "lastname"
+                    },
+                    {
+                        data: "email",
+                        name: "email"
+                    },
+                    {
+                        data: "gender",
+                        name: "gender"
+                    },
+                    {
+                        data: "age",
+                        name: "age"
+                    },
+                    {
+                        data: "bloodtype.type",
+                        name: "bloodtype.type"
+                    },
+                    // { data: "actions", name: "actions", orderable: false, searchable: false },
+                ],
+                order: [
+                    [0, "desc"]
+                ],
+                lengthMenu: [
+                    [10, 25, 50, 100, -1],
+                    [10, 25, 50, 100, "All"],
+                ],
+            });
+        });
+    </script>
+@endpush

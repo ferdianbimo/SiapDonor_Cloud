@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>{{ $pageTitle }}</title>
 </head>
 <body>
     @extends('app')
@@ -16,8 +17,7 @@
                         <div class="container">
                             <div class="row justify-content-start">
                                 <div class="col-lg-8">
-                                    <p
-                                        class="d-inline-block border border-white rounded text-primary fw-semi-bold py-1 px-3 animated slideInDown">
+                                    <p class="d-inline-block border border-white rounded text-primary fw-semi-bold py-1 px-3 animated slideInDown">
                                         Welcome to SiapDonor</p>
                                     <h1 class="display-1 mb-4 animated slideInDown">Information
                                     </h1>

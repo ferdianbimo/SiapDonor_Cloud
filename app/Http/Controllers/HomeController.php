@@ -7,7 +7,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $pageTitle = 'SiapDonor';
+        $pageTitle = 'Home';
 
         return view('welcome', ['pageTitle' => $pageTitle]);
     }

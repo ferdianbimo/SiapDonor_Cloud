@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>SiapDonor</title>
 <head>
+    @vite('resources/sass/app.scss')
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -28,6 +28,9 @@
 </head>
 
 <body>
+    @vite('resources/js/app.js')
+    @stack('scripts')
+    @yield('content')
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
