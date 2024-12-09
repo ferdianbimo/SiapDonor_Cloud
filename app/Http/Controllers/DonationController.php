@@ -75,19 +75,40 @@ class DonationController extends Controller
         return redirect()->route('donation');
     }
 
-    public function getData(Request $request)
+    public function show($id)
     {
-        $donors = Donor::with('bloodtype');
-
-        if ($request->ajax()) {
-        return datatables()->of($donors)
-            ->addIndexColumn()
-            // ->addColumn('actions', function($donor) {
-            //     return view('donor.actions', compact('donor'));
-            // })
-            ->toJson();
-        }
+        $pageTitle = 'Donors Detail';
+        $donor = Donor::find($id);
+        return view('action.show', compact('pageTitle', 'donor'));
     }
 
 
+    public function edit($id)
+    {
+        $pageTitle = 'Edit Donor';
+        $donor = Donor::find($id);
+        $bloodtypes = Bloodtype::all();
+        return view('action.edit', compact('pageTitle', 'donor', 'bloodtypes'));
+    }
+
+    public function destroy($id)
+    {
+        $donor = Donor::find($id);
+        $donor->delete();
+        return redirect()->route('donation');
+    }
+
+    public function getData(Request $request)
+{
+    $donors = Donor::with('bloodtype');
+
+    if ($request->ajax()) {
+        return datatables()->of($donors)
+            ->addIndexColumn()
+            ->addColumn('action', function($donor) {
+                return view('action.actions', compact('donor'));
+            })
+            ->toJson();
+    }
+}
 }

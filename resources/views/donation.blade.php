@@ -88,7 +88,7 @@
                         <th>Gender</th>
                         <th>Age</th>
                         <th>Blood Type</th>
-
+                        <th>Action</th>
                     </tr>
                 </thead>
             </table>
@@ -139,7 +139,7 @@
                         data: "bloodtype.type",
                         name: "bloodtype.type"
                     },
-                    // { data: "actions", name: "actions", orderable: false, searchable: false },
+                    { data: "action", name: "action", orderable: false, searchable: false },
                 ],
                 order: [
                     [0, "desc"]

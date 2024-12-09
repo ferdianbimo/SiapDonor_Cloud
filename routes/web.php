@@ -13,3 +13,7 @@ Route::get('/donation', [App\Http\Controllers\DonationController::class, 'index'
 
 Route::get('getDonors', [DonationController::class,
 'getData'])->name('donors.getData');
+
+Route::get('action/{donor}', [DonationController::class, 'show'])->name('action.show');
+Route::get('action/{donor}/edit', [DonationController::class, 'edit'])->name('action.edit');
+Route::delete('action/{donor}', [DonationController::class, 'destroy'])->name('action.destroy');
