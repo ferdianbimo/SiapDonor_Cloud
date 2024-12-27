@@ -11,7 +11,7 @@ pipeline {
             }
         }
 
-     stage('Build Docker Images') {
+    stage('Build Docker Images') {
             steps {
                 echo "Building Docker images local"
                 sh 'docker build -t laravel-app:latest -f Dockerfile .'
@@ -20,12 +20,13 @@ pipeline {
             }
         }
 
-post {
+	post {
         success {
             echo "Pipeline executed successfully!"
         }
         failure {
             echo "Pipeline failed!"
-        }
-    }
+			}
+		}
+	}
 }
