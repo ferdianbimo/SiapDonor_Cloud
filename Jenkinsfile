@@ -14,10 +14,8 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
+                echo 'Building Docker Image...'
                 // Tambahkan langkah build image Docker di sini
-               sh '''
-                docker build -t laravel-app:latest .
-                docker push laravel-app:latest
             }
         }
         stage('Push Image to Docker Hub') {
@@ -36,6 +34,16 @@ pipeline {
             steps {
                 echo 'Deploying to Kubernetes...'
                 // Tambahkan langkah deploy aplikasi ke Kubernetes di sini
+            }
+        }
+        
+        post {
+        success {
+            echo "Pipeline executed successfully!"
+        }
+        failure {
+            echo "Pipeline failed!"
+                }
             }
         }
     }
