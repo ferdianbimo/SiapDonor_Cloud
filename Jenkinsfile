@@ -16,6 +16,7 @@ pipeline {
             steps {
                 echo 'Building Docker Image...'
                 // Tambahkan langkah build image Docker di sini
+                sh docker build -t laravel-app
             }
         }
         stage('Push Image to Docker Hub') {
