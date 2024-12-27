@@ -36,15 +36,5 @@ pipeline {
                 // Tambahkan langkah deploy aplikasi ke Kubernetes di sini
             }
         }
-        
-        post {
-        success {
-            echo "Pipeline executed successfully!"
-        }
-        failure {
-            echo "Pipeline failed!"
-                }
-            }
-        }
     }
 }
