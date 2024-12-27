@@ -1,32 +1,40 @@
 pipeline {
     agent any
-
     stages {
-        stage('Git checkout') {
+        stage('Checkout') {
             steps {
-                echo "Checking out the code from Git repository"
-                checkout([$class: 'GitSCM', 
-                          branches: [[name: '*/main']], 
-                          userRemoteConfigs: [[url: 'https://github.com/ferdianbimo/SiapDonor_Cloud.git']]])
+                git branch: 'main', url: 'https://github.com/ferdianbimo/SiapDonor_Cloud.git'
             }
         }
-
-    stage('Build Docker Images') {
+        stage('Send Dockerfile to Ansible') {
             steps {
-                echo "Building Docker images local"
-                sh 'docker build -t laravel-app:latest -f Dockerfile .'
-                sh 'docker build -t nginx:alpine -f nginx.Dockerfile .'
-                sh 'docker build -t mysql:8.0 -f mysql.Dockerfile .'
+                echo 'Sending Dockerfile to Ansible...'
+                // Tambahkan langkah mengirimkan Dockerfile ke Ansible di sini
             }
         }
-
-	post {
-        success {
-            echo "Pipeline executed successfully!"
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker Image...'
+                // Tambahkan langkah build image Docker di sini
+            }
         }
-        failure {
-            echo "Pipeline failed!"
-			}
-		}
-	}
+        stage('Push Image to Docker Hub') {
+            steps {
+                echo 'Pushing Image to Docker Hub...'
+                // Tambahkan langkah push image ke Docker Hub di sini
+            }
+        }
+        stage('Copy Files to Kubernetes') {
+            steps {
+                echo 'Copying Files to Kubernetes...'
+                // Tambahkan langkah copy file ke Kubernetes di sini
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            steps {
+                echo 'Deploying to Kubernetes...'
+                // Tambahkan langkah deploy aplikasi ke Kubernetes di sini
+            }
+        }
+    }
 }
