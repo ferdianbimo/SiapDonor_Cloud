@@ -1,0 +1,7 @@
+containers:
+  - name: laravel-app
+    image: laravel-app:latest
+  - name: nginx
+    image: nginx:alpine
+  - name: mysql
+    image: mysql:8.0
