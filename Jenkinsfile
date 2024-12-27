@@ -4,49 +4,23 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                echo "Checking out the code from SCM"
-                checkout scm
-                sleep 1
+                echo "Checking out the code from Git repository"
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: '*/main']], 
+                          userRemoteConfigs: [[url: 'https://github.com/ferdianbimo/SiapDonor_Cloud.git']]])
             }
         }
 
-        stage('Sending Dockerfile to Ansible server') {
+     stage('Build Docker Images') {
             steps {
-                echo "Sending Dockerfile to the Ansible server"
-                sleep 1
+                echo "Building Docker images local"
+                sh 'docker build -t laravel-app:latest -f Dockerfile .'
+                sh 'docker build -t nginx:alpine -f nginx.Dockerfile .'
+                sh 'docker build -t mysql:8.0 -f mysql.Dockerfile .'
             }
         }
 
-        stage('Docker build image') {
-            steps {
-                echo "Building Docker image"
-                sleep 2
-            }
-        }
-
-        stage('Push docker images to DockerHub') {
-            steps {
-                echo "Pushing Docker image to DockerHub"
-                sleep 2
-            }
-        }
-
-        stage('Copy files from Jenkins to Kubernetes server') {
-            steps {
-                echo "Copying files from Jenkins to the Kubernetes server"
-                sleep 1
-            }
-        }
-
-        stage('Kubernetes deployment using Ansible') {
-            steps {
-                echo "Deploying application to Kubernetes using Ansible"
-                sleep 20
-            }
-        }
-    }
-
-    post {
+post {
         success {
             echo "Pipeline executed successfully!"
         }
