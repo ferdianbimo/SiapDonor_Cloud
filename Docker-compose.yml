@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: laravel-app1
-    container_name: laravel_app1
+    container_name: laravel_app
     restart: unless-stopped
     volumes:
       - .:/var/www
