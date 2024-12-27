@@ -14,7 +14,6 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker Image...'
                 // Tambahkan langkah build image Docker di sini
                sh '''
                 docker build -t laravel-app:latest .
